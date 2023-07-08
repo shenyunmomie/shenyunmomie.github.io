@@ -1,0 +1,235 @@
+<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>#page {
+	background: red;
+}
+
+/* 右侧小按钮圆角 */
+#rightside>div>button,
+#to_comment {
+	margin-right: 4px;
+	border-radius: 7px;
+}
+
+/*侧边滑动颜色*/
+:root {
+	--btn-bg: #3a87b9;
+}
+
+/*文章页信息栏美化*/
+#post-info .post-title {
+	font-weight: 600;
+	/*字体粗细*/
+	font-size: 2.5em;
+	/*字体大小*/
+	line-height: 2.2;
+	/*元素高度*/
+	letter-spacing: 9px;
+	/*字体间距*/
+}
+
+/*信息栏高度调整*/
+#page-header.post-bg {
+	height: 26rem;
+}
+
+/*Web端信息栏适配*/
+@media screen and (min-width: 421px) {
+	#page-header #post-info {
+		bottom: 8rem;
+	}
+}
+
+/*Wap端信息栏适配*/
+@media screen and (max-width: 420px) {
+	#page-header #post-info {
+		bottom: 2rem;
+	}
+}
+
+/*文章页目录卡片圆角*/
+#aside-content .card-widget {
+	border-radius: 20px;
+}
+
+/*调宽页脚*/
+#footer-wrap {
+	padding: 3rem 2rem;
+	/*前者为上下边距，后者为左右边距*/
+}
+
+/*个人信息美化*/
+#aside-content>.card-widget.card-info {
+	background: #fff url(![](https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307060043141.jpg)) top 33% center no-repeat;
+	position: relative;
+}
+
+#aside-content .card-info #card-info-btn {
+	display: none;
+}
+
+#aside-content .card-info .author-info__name {
+	font-weight: 700;
+	color: black;
+}
+
+#aside-content .card-info .author-info__description {
+	font-weight: 600;
+	color: black;
+}
+
+.site-data>a .headline {
+	color: rgb(0 0 0 / 100%);
+}
+
+/*右下角按钮*/
+#rightside>div>button,
+#rightside>div>a {
+	display: block;
+	margin-bottom: 6px;
+	width: 40px;
+	height: 40px;
+	border-radius: 25px;
+	background-color: #f1f1f1;
+	color: #2d587a;
+	text-align: center;
+	font-size: 16px;
+	line-height: 40px;
+}
+
+/*本地搜索美化*/
+.search-dialog .search-nav {
+	color: #000000;
+	font-size: 1.6em;
+	line-height: 2;
+}
+
+#local-search .search-dialog .local-search-box input {
+	padding: 13px 21px;
+	border: 3px solid #4182d9;
+	border-radius: 11px;
+}
+
+hr {
+	border: 3px dashed #4f80d8;
+}
+
+/*友链美化*/
+#article-container .flink .flink-list>.flink-list-item {
+	margin: 15px 7px;
+	height: 99px;
+	border-radius: 11px;
+	line-height: 17px;
+	border-style: groove;
+	border-color: #f4f4f4;
+}
+
+/* 头像微调 */
+.flink-item-icon {
+	margin-right: 0 !important;
+	transition: .5s !important;
+}
+
+.flink-item-name,
+.flink-item-desc {
+	padding-left: 10px !important;
+}
+
+/* 去掉原来自带的before */
+#article-container .flink .flink-list>.flink-list-item::before {
+	content: none;
+}
+
+/* 鼠标经过改变背景 */
+#article-container .flink .flink-list>.flink-list-item:hover {
+	background-color: #739d8f;
+	box-shadow: 0 0 20px rgba(0, 0, 0, .3);
+}
+
+/* 鼠标经过改变文字颜色 */
+#article-container .flink .flink-list>.flink-list-item:hover a {
+	color: white !important;
+}
+
+/* 鼠标经过头像滚动 */
+#article-container .flink .flink-list>.flink-list-item:hover .flink-item-icon {
+	width: 60px;
+	margin-left: -70px;
+	-webkit-transform: rotate(-180deg);
+	-moz-transform: rotate(-180deg);
+	-o-transform: rotate(-180deg);
+	-ms-transform: rotate(-180deg);
+	transform: rotate(-180deg);
+}
+
+/*侧边栏标签美化*/
+#aside-content .card-tag-cloud a {
+	color: var(--heo-fontcolor) !important;
+	font-size: 0.8rem;
+	border-radius: 9px;
+	border-style: dashed;
+}
+
+#aside-content .item-headline {
+	font-weight: 700;
+}
+
+/*页脚美化*/
+#footer-wrap {
+  text-align: center;
+  background-color: #203e57;
+}
+
+/*文章的整体背景，渐变色设置*/
+#web_bg {
+	background-image: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
+	/* 蓝色渐变 */
+	/* background: #667db6;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to right, #667db6, #0082c8, #0082c8, #667db6);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right, #667db6, #0082c8, #0082c8, #667db6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ */
+
+	/* 淡紫色 */
+	/* background: #C9D6FF;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to bottom, #E2E2E2, #C9D6FF);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to bottom, #E2E2E2, #C9D6FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ */
+
+	background: #ECE9E6;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to bottom, #FFFFFF, #ECE9E6);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to bottom, #FFFFFF, #ECE9E6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+}
+
+/* 主页所有文章页面背景 */
+#aside_content .card-widget,
+#recent-posts>.recent-post-item,
+.layout_page>div:first-child:not(.recent-posts),
+.layout_post>#page,
+.layout_post>#post,
+.read-mode .layout_post>#post {
+	/* 以下代表透明度为0.5 */
+	background: rgba(255, 255, 255, .5);
+}
+
+/*侧边栏页面*/
+#aside-content>.card-widget {
+	background: rgba(255, 255, 255, .6);
+}
+
+#aside-content>.sticky_layout>.card-widget {
+	background: rgba(255, 255, 255, .6);
+}
+
+/*文章页面*/
+.layout>#post {
+	background: rgba(255, 255, 255, .6);
+}
+
+/*分类页面*/
+.layout>#page {
+
+	background: rgba(255, 255, 255, .6);
+}
+
+/*时间轴页面*/
+.layout>#archive {
+	background: rgba(255, 255, 255, .6);
+}
