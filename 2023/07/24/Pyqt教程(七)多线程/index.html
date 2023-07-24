@@ -1,0 +1,289 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Pyqt教程(七)多线程 | 一个正常的人</title><meta name="author" content="shenyunmomie"><meta name="copyright" content="shenyunmomie"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="[TOC] 线程基本概念 进程：系统中资源分配和资源调度的基本单位，叫作进程。 线程：个线程则是进程中的执行流程，一个进程中可以同时包括多个线程，每个线程也可以得到一小段程序的执行时间，这样一个进程就可以具有多个并发执行的线程。 多线程的优点 通过网络与web服务器和数据库进行通信。 执行占用大量时间的操作 区分具有不同优先级的任务 使用户界面可用在将时间分配给后台任务时仍能快速做出响应  多线程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Pyqt教程(七)多线程">
+<meta property="og:url" content="http://shenyunmomie.github.io/2023/07/24/Pyqt%E6%95%99%E7%A8%8B(%E4%B8%83)%E5%A4%9A%E7%BA%BF%E7%A8%8B/index.html">
+<meta property="og:site_name" content="一个正常的人">
+<meta property="og:description" content="[TOC] 线程基本概念 进程：系统中资源分配和资源调度的基本单位，叫作进程。 线程：个线程则是进程中的执行流程，一个进程中可以同时包括多个线程，每个线程也可以得到一小段程序的执行时间，这样一个进程就可以具有多个并发执行的线程。 多线程的优点 通过网络与web服务器和数据库进行通信。 执行占用大量时间的操作 区分具有不同优先级的任务 使用户界面可用在将时间分配给后台任务时仍能快速做出响应  多线程">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082326081.jpg">
+<meta property="article:published_time" content="2023-07-23T20:54:48.000Z">
+<meta property="article:modified_time" content="2023-07-23T21:01:06.468Z">
+<meta property="article:author" content="shenyunmomie">
+<meta property="article:tag" content="博客">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082326081.jpg"><link rel="shortcut icon" href="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082323164.png"><link rel="canonical" href="http://shenyunmomie.github.io/2023/07/24/Pyqt%E6%95%99%E7%A8%8B(%E4%B8%83)%E5%A4%9A%E7%BA%BF%E7%A8%8B/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Pyqt教程(七)多线程',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-07-24 05:01:06'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/style.css?1"><link rel="stylesheet" href="/css/iconfont.css?1"><link rel="stylesheet" href="//at.alicdn.com/t/c/font_4157962_euqnjj65mt.css"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Zfour/hexo-electric-clock@1.0.6/clock.css"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082324841.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">24</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 档案</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情连接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-icon-error-fill"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082326081.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="一个正常的人"><img class="site-icon" src="/img/logo1.jpg"/><span class="site-name">一个正常的人</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 档案</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情连接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-icon-error-fill"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Pyqt教程(七)多线程</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-07-23T20:54:48.000Z" title="发表于 2023-07-24 04:54:48">2023-07-24</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-07-23T21:01:06.468Z" title="更新于 2023-07-24 05:01:06">2023-07-24</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">937</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>2分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Pyqt教程(七)多线程"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>[TOC]</p>
+<h1 id="线程基本概念"><a href="#线程基本概念" class="headerlink" title="线程基本概念"></a>线程基本概念</h1><hr>
+<p><strong>进程</strong>：系统中资源分配和资源调度的基本单位，叫作进程。</p>
+<p><strong>线程</strong>：个线程则是进程中的执行流程，一个进程中可以同时包括多个线程，每个线程也可以得到一小段程序的执行时间，这样一个进程就可以具有多个并发执行的线程。</p>
+<h2 id="多线程的优点"><a href="#多线程的优点" class="headerlink" title="多线程的优点"></a>多线程的优点</h2><ul>
+<li>通过网络与web服务器和数据库进行通信。</li>
+<li>执行占用大量时间的操作</li>
+<li>区分具有不同优先级的任务</li>
+<li>使用户界面可用在将时间分配给后台任务时仍能快速做出响应</li>
+</ul>
+<h2 id="多线程的缺点"><a href="#多线程的缺点" class="headerlink" title="多线程的缺点"></a>多线程的缺点</h2><p>建议一般不要在程序中使用太多的线程，这样可以最大限度地减少操作系统资源的使用，并提高性能</p>
+<ul>
+<li>系统将为进程和线程所需的上下文信息使用内存。因此，可用创建的进程和线程的数目会收到可用内存的限制。</li>
+<li>跟踪大量的线程将占用大量的处理器时间。如果线程过多，则其中大多数线程都不会产生明显的进度。如果大多数线程处于一个进程中，则其他进程中的线程的调度频率就会很低。</li>
+<li>使用多个线程控制代码执行非常复制，并可能产生许多Bug</li>
+<li>销毁线程需要了解可能发生的问题并进行处理</li>
+</ul>
+<h1 id="多线程的实现"><a href="#多线程的实现" class="headerlink" title="多线程的实现"></a>多线程的实现</h1><hr>
+<p>在PyQt5中实现多线程主要有两种方法，一种是使用QTimer计时器模块；另一种是使用QThread线程模块</p>
+<h2 id="QTimer：计时器"><a href="#QTimer：计时器" class="headerlink" title="QTimer：计时器"></a>QTimer：计时器</h2><p>如果需要周期性地执行某项操作，就可以使用QTimer类实现，QTimer类表示计时器，它可以定期发射timeout信号，时间间隔的长度在start()方法中指定，以毫秒为单位，如果要停止计时器，则需要使用stop()方法。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> PyQt5.QtCore <span class="keyword">import</span> QTimer</span><br><span class="line"></span><br><span class="line">timer = QTimer(MainWindow)</span><br><span class="line">timer.start()	<span class="comment">#开始计时器</span></span><br><span class="line">timer.timeout.connect(槽函数)		<span class="comment"># 设置计时器要执行的槽函数</span></span><br><span class="line"><span class="comment"># 接下来，timer线程会重复执行槽函数</span></span><br><span class="line">timer.stop()		<span class="comment">#停止计时器</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="QThread：线程类"><a href="#QThread：线程类" class="headerlink" title="QThread：线程类"></a>QThread：线程类</h2><p><strong>常用方法</strong></p>
+<table>
+<thead>
+<tr>
+<th>run()</th>
+<th>线程的起点，在调用start()之后，新创建的线程将调用该方法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>start()</td>
+<td>启动线程</td>
+</tr>
+<tr>
+<td>wait()</td>
+<td>阻塞线程</td>
+</tr>
+<tr>
+<td>sleep()</td>
+<td>以秒为单位休眠线程</td>
+</tr>
+<tr>
+<td>msleep()</td>
+<td>以毫秒为单位休眠线程</td>
+</tr>
+<tr>
+<td>usleep()</td>
+<td>以微秒为单位休眠线程</td>
+</tr>
+<tr>
+<td>quit()</td>
+<td>退出线程的事件循环并返回代码0(成功)，相当于exit(0)</td>
+</tr>
+<tr>
+<td>exit()</td>
+<td>退出线程的事件循环，并返回代码，如果返回0成功，其他错误</td>
+</tr>
+<tr>
+<td>terminate()</td>
+<td>强制终止线程，在terminate()之后应该使用wait()方法，以确保当线程终止时，等待线程完成的所有线程都将被唤醒，另外，不建议使用这种方法终止线程</td>
+</tr>
+<tr>
+<td>setPriority()</td>
+<td>设置线程的优先级：QThread.IdlePriority：空闲优先级QThread.LowestPriority：最低优先级QThread.LowPriority：低优先级QThread.NormalPriority：系统默认优先级QThread.HighPrioriry：高优先级QThread.HighestPriority：最高优先级QThread.TimeCriticalPriority：尽可能频繁地分配执行QThread.InheritPriority：默认，使用与创建线程相同的优先级</td>
+</tr>
+<tr>
+<td>isFinished()</td>
+<td>是否完成</td>
+</tr>
+<tr>
+<td>isRunning()</td>
+<td>是否正在运行</td>
+</tr>
+</tbody></table>
+<p><strong>信号</strong></p>
+<table>
+<thead>
+<tr>
+<th>started</th>
+<th>在调用run()方法之前，在相关线程开始执行时从该线程发射</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>finished</td>
+<td>在相关线程完成执行之前从该线程发射</td>
+</tr>
+</tbody></table>
+<h2 id="线程的生命周期"><a href="#线程的生命周期" class="headerlink" title="线程的生命周期"></a>线程的生命周期</h2><hr>
+<p>线程也有自己的生命周期，其中包含5种状态，分别为出生状态、就绪状态、运行状态、暂停状态（包括休眠、等待和阻塞等）和死亡状态</p>
+<p><img src="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307240457216.png" alt="Image [4]"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://shenyunmomie.github.io">shenyunmomie</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://shenyunmomie.github.io/2023/07/24/Pyqt%E6%95%99%E7%A8%8B(%E4%B8%83)%E5%A4%9A%E7%BA%BF%E7%A8%8B/">http://shenyunmomie.github.io/2023/07/24/Pyqt%E6%95%99%E7%A8%8B(%E4%B8%83)%E5%A4%9A%E7%BA%BF%E7%A8%8B/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://shenyunmomie.github.io" target="_blank">一个正常的人</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082326081.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082328946.jpg" rel="external nofollow noreferrer" target="_blank"><img class="post-qr-code-img" src="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082328946.jpg" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/07/24/python%E4%B9%8B%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" title="python之文件操作"><img class="cover" src="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082326081.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">python之文件操作</div></div></a></div><div class="next-post pull-right"><a href="/2023/07/24/Pyqt%E6%95%99%E7%A8%8B(%E4%BA%94)%E4%BF%A1%E5%8F%B7%E4%B8%8E%E6%A7%BD/" title="Pyqt教程(五)信号与槽"><img class="cover" src="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082326081.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Pyqt教程(五)信号与槽</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="lv-container" data-id="city" data-uid="MTAyMC81ODY4NS8zNTE0Nw=="></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082324841.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">shenyunmomie</div><div class="author-info__description">记录生活，分享知识</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">24</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><a id="card-info-btn" target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/shenyunmomie"><i class="fab fa-github"></i><span>关注我</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/shenyunmomie" rel="external nofollow noreferrer" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:18731548870@163.com" rel="external nofollow noreferrer" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-text">线程基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%9A%84%E4%BC%98%E7%82%B9"><span class="toc-text">多线程的优点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%BC%BA%E7%82%B9"><span class="toc-text">多线程的缺点</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">多线程的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#QTimer%EF%BC%9A%E8%AE%A1%E6%97%B6%E5%99%A8"><span class="toc-text">QTimer：计时器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#QThread%EF%BC%9A%E7%BA%BF%E7%A8%8B%E7%B1%BB"><span class="toc-text">QThread：线程类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-text">线程的生命周期</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/07/24/Hexo%E6%95%99%E7%A8%8B(%E4%B8%89)%E5%8D%9A%E5%AE%A2%E7%BE%8E%E5%8C%96/" title="Hexo教程(三)博客美化"><img src="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082326081.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hexo教程(三)博客美化"/></a><div class="content"><a class="title" href="/2023/07/24/Hexo%E6%95%99%E7%A8%8B(%E4%B8%89)%E5%8D%9A%E5%AE%A2%E7%BE%8E%E5%8C%96/" title="Hexo教程(三)博客美化">Hexo教程(三)博客美化</a><time datetime="2023-07-24T03:51:44.000Z" title="发表于 2023-07-24 11:51:44">2023-07-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/24/python%E4%B9%8B%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" title="python之文件操作"><img src="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082326081.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="python之文件操作"/></a><div class="content"><a class="title" href="/2023/07/24/python%E4%B9%8B%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" title="python之文件操作">python之文件操作</a><time datetime="2023-07-23T21:01:02.000Z" title="发表于 2023-07-24 05:01:02">2023-07-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/24/Pyqt%E6%95%99%E7%A8%8B(%E4%B8%83)%E5%A4%9A%E7%BA%BF%E7%A8%8B/" title="Pyqt教程(七)多线程"><img src="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082326081.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Pyqt教程(七)多线程"/></a><div class="content"><a class="title" href="/2023/07/24/Pyqt%E6%95%99%E7%A8%8B(%E4%B8%83)%E5%A4%9A%E7%BA%BF%E7%A8%8B/" title="Pyqt教程(七)多线程">Pyqt教程(七)多线程</a><time datetime="2023-07-23T20:54:48.000Z" title="发表于 2023-07-24 04:54:48">2023-07-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/24/Pyqt%E6%95%99%E7%A8%8B(%E4%BA%94)%E4%BF%A1%E5%8F%B7%E4%B8%8E%E6%A7%BD/" title="Pyqt教程(五)信号与槽"><img src="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082326081.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Pyqt教程(五)信号与槽"/></a><div class="content"><a class="title" href="/2023/07/24/Pyqt%E6%95%99%E7%A8%8B(%E4%BA%94)%E4%BF%A1%E5%8F%B7%E4%B8%8E%E6%A7%BD/" title="Pyqt教程(五)信号与槽">Pyqt教程(五)信号与槽</a><time datetime="2023-07-23T20:33:51.000Z" title="发表于 2023-07-24 04:33:51">2023-07-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/24/Pyqt%E6%95%99%E7%A8%8B(%E5%85%AD)%E5%B8%B8%E7%94%A8%E6%8E%A7%E4%BB%B6/" title="Pyqt教程(六)常用控件"><img src="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082326081.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Pyqt教程(六)常用控件"/></a><div class="content"><a class="title" href="/2023/07/24/Pyqt%E6%95%99%E7%A8%8B(%E5%85%AD)%E5%B8%B8%E7%94%A8%E6%8E%A7%E4%BB%B6/" title="Pyqt教程(六)常用控件">Pyqt教程(六)常用控件</a><time datetime="2023-07-23T20:07:11.000Z" title="发表于 2023-07-24 04:07:11">2023-07-24</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By shenyunmomie</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to my blog!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">簡</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>function loadLivere () {
+  if (typeof LivereTower === 'object') {
+    window.LivereTower.init()
+  }
+  else {
+    (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+  }
+}
+
+if ('Livere' === 'Livere' || !true) {
+  if (true) btf.loadComment(document.getElementById('lv-container'), loadLivere)
+  else loadLivere()
+}
+else {
+  function loadOtherComment () {
+    loadLivere()
+  }
+}</script></div><script src="/js/script.js?1"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div><!-- hexo injector body_end start --><script data-pjax>function electric_clock_injector_config(){
+                var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
+                var item_html = '<div class="card-widget card-clock"><div class="card-glass"><div class="card-background"><div class="card-content"><div id="hexo_electric_clock"><img id="card-clock-loading" src="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-clock/clock/images/weather/loading.gif" style="height: 120px; width: 100%;" data-ll-status="loading" class="entered loading"></div></div></div></div></div>';
+                console.log('已挂载electric_clock')
+                // parent_div_git.innerHTML=item_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",item_html) // 有报错，但不影响使用(支持pjax跳转)
+            }if( document.getElementsByClassName('sticky_layout')[0] && (location.pathname ==='all'|| 'all' ==='all')){
+
+            electric_clock_injector_config()
+        } </script><script src="https://pv.sohu.com/cityjson?ie=utf-8"></script><script data-pjax  src="https://cdn.jsdelivr.net/gh/Zfour/hexo-electric-clock@1.0.6/clock.js"></script><!-- hexo injector body_end end --></body></html>
