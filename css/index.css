@@ -1413,7 +1413,7 @@ body {
   background: var(--global-bg);
   color: var(--font-color);
   font-size: var(--global-font-size);
-  font-family: AlibabaPuHuiTi-3-75-SemiBold;
+  font-family: HYSongYunLangHeiW;
   line-height: 2;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
@@ -1675,7 +1675,7 @@ figure.highlight pre .javascript .function {
 #article-container pre,
 #article-container code {
   font-size: 15px;
-  font-family: AlibabaPuHuiTi-3-75-SemiBold,"Microsoft YaHei", sans-serif !important;
+  font-family: AlibabaPuHuiTi-3-55-Regular,"Microsoft YaHei", sans-serif !important;
 }
 #article-container code {
   padding: 2px 4px;
