@@ -1,0 +1,451 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>selenium_webdriver高级运用 | 一个正常的人</title><meta name="author" content="shenyunmomie"><meta name="copyright" content="shenyunmomie"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="[TOC]  本文是学习了《Selenium自动化测试完全指南》和其他网络上的教程写出的学习笔记  selenium的等待机制 人们在手工测试网站时，总会自然而然地等待网页加载完毕再进行操作。如果某个局部区域是由Ajax加载的内容，人们要等待局部加载完毕才能进行下一步操作，而不是在空白或残缺的界面上操作。另一方面，如果等待超过一定时间，但页面或局部区域依然没有加载完毕，那么人们很可能将其标记为一处">
+<meta property="og:type" content="article">
+<meta property="og:title" content="selenium_webdriver高级运用">
+<meta property="og:url" content="http://shenyunmomie.github.io/2023/08/20/selenium-webdriver%E9%AB%98%E7%BA%A7%E8%BF%90%E7%94%A8/index.html">
+<meta property="og:site_name" content="一个正常的人">
+<meta property="og:description" content="[TOC]  本文是学习了《Selenium自动化测试完全指南》和其他网络上的教程写出的学习笔记  selenium的等待机制 人们在手工测试网站时，总会自然而然地等待网页加载完毕再进行操作。如果某个局部区域是由Ajax加载的内容，人们要等待局部加载完毕才能进行下一步操作，而不是在空白或残缺的界面上操作。另一方面，如果等待超过一定时间，但页面或局部区域依然没有加载完毕，那么人们很可能将其标记为一处">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082326081.jpg">
+<meta property="article:published_time" content="2023-08-20T07:07:19.000Z">
+<meta property="article:modified_time" content="2023-08-21T19:21:12.669Z">
+<meta property="article:author" content="shenyunmomie">
+<meta property="article:tag" content="selenium">
+<meta property="article:tag" content="自动化测试">
+<meta property="article:tag" content="selenium webdriver">
+<meta property="article:tag" content="高级运用">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082326081.jpg"><link rel="shortcut icon" href="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082323164.png"><link rel="canonical" href="http://shenyunmomie.github.io/2023/08/20/selenium-webdriver%E9%AB%98%E7%BA%A7%E8%BF%90%E7%94%A8/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="/css/iconfont.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'selenium_webdriver高级运用',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-08-22 03:21:12'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/style.css?1"><link rel="stylesheet" href="/css/iconfont.css?1"><link rel="stylesheet" href="//at.alicdn.com/t/c/font_4157962_euqnjj65mt.css"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Zfour/hexo-electric-clock@1.0.6/clock.css"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082324841.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">34</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">47</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 档案</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情连接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-icon-error-fill"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082326081.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="一个正常的人"><img class="site-icon" src="/img/logo1.jpg"/><span class="site-name">一个正常的人</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 档案</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情连接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-icon-error-fill"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">selenium_webdriver高级运用</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-08-20T07:07:19.000Z" title="发表于 2023-08-20 15:07:19">2023-08-20</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-08-21T19:21:12.669Z" title="更新于 2023-08-22 03:21:12">2023-08-22</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B5%8B%E8%AF%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">测试学习笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3.5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>12分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="selenium_webdriver高级运用"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>[TOC]</p>
+<blockquote>
+<p>本文是学习了《Selenium自动化测试完全指南》和其他网络上的教程写出的学习笔记</p>
+</blockquote>
+<h1 id="selenium的等待机制"><a href="#selenium的等待机制" class="headerlink" title="selenium的等待机制"></a>selenium的等待机制</h1><blockquote>
+<p>人们在手工测试网站时，总会自然而然地等待网页加载完毕再进行操作。如果某个局部区域是由Ajax加载的内容，人们要等待局部加载完毕才能进行下一步操作，而不是在空白或残缺的界面上操作。另一方面，如果等待超过一定时间，但页面或局部区域依然没有加载完毕，那么人们很可能将其标记为一处程序错误，要求开发人员去排查这个问题。</p>
+</blockquote>
+<p>Selenium拥有丰富的等待机制，将原本人为的等待转换为由机器去等待，并判断什么时候该进行下一步操作</p>
+<h2 id="页面级等待机制"><a href="#页面级等待机制" class="headerlink" title="页面级等待机制"></a>页面级等待机制</h2><blockquote>
+<p>等待页面加载完毕的超时时间，默认为0</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wd.set_page_load_timeout(最长等待秒数)</span><br><span class="line"><span class="comment"># 全局设置，会在整个WebDriver实例的生命周期内生效</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 未在规定时间内加载完毕，会抛出异常</span></span><br><span class="line">selenium.common.exceptions.TimeoutException: Message: timeout</span><br></pre></td></tr></table></figure>
+
+<h2 id="元素级等待机制"><a href="#元素级等待机制" class="headerlink" title="元素级等待机制"></a>元素级等待机制</h2><blockquote>
+<p>现代网站大多数是Ajax型网站，很多页面元素都不再是页面加载完毕就能显示出来，而是要触发特定区域的操作，然后等待目标元素出现在页面上才能进行下一步操作。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 方法一：强制等待</span></span><br><span class="line">time.sleep(<span class="number">3</span>)</span><br><span class="line"><span class="comment"># 毫无弹性，降低测试效率</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 方法二：隐式等待</span></span><br><span class="line">wd.implicitly_wait(秒)</span><br><span class="line"><span class="comment"># 全局，给find_element...函数增加一个宽限时间</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 方法三：显式等待</span></span><br><span class="line"><span class="comment"># 指定条件判断函数，selenium会每个一定时间检查该条件</span></span><br><span class="line"><span class="keyword">from</span> selenium.webdriver.support.wait <span class="keyword">import</span> WebDriverWait</span><br><span class="line"></span><br><span class="line">WebDriverWait(WebDriver实例, 超时秒数, 检测时间间隔[可选], 可忽略异常集合[可选])</span><br><span class="line"><span class="comment"># 检测时间间隔：调用until或until_not传入的条件判断函数的间隔时间，默认为0.5s</span></span><br><span class="line"><span class="comment"># 可忽略异常集合：在调用until或until_not中传入的条件判断函数时，如果抛出的是这个集合中定义的异常，代码就不会执行失败，会继续正常执行。默认在集合中只有NoSuchElementException异常。</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># webdriver执行等待函数</span></span><br><span class="line">wdw.until(条件判断函数, [<span class="string">&quot;超时后的自定义异常消息&quot;</span>])	<span class="comment"># 等待直到条件判断函数的返回值不为False（且没有抛出可忽略的异常）。</span></span><br><span class="line">wdw.until_not(条件判断函数, [<span class="string">&quot;超时后的自定义异常消息&quot;</span>]) <span class="comment"># 等待直到条件判断函数的返回值为False（如果抛出可忽略的异常，也会当作False处理），和until恰好相反</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Selenium预定义等待条件函数"><a href="#Selenium预定义等待条件函数" class="headerlink" title="Selenium预定义等待条件函数"></a>Selenium预定义等待条件函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium.webdriver.support <span class="keyword">import</span> expected_conditions</span><br><span class="line"></span><br><span class="line">expected_conditions.visibility_of_element_located(目标元素定位)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 例如</span></span><br><span class="line">targetLocator = (By.LINK_TEXT,<span class="string">&quot;立即注册&quot;</span>)</span><br><span class="line">wdw.until(expected_conditions.visibility_of_element_located(targetLocator))	<span class="comment"># 判断该元素是否已经显示</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 预定义中常见的条件函数</span></span><br><span class="line">visibility_of_element_located(目标元素定位)	<span class="comment"># 判断该元素是否已经显示</span></span><br><span class="line">visibility_of(目标元素)		<span class="comment"># 判断该元素是否已经显示</span></span><br><span class="line">visibility_of_all_elements_located(目标元素定位)	<span class="comment">#判断页面上是否存在一个或多个符合定位的元素，且是否全部显示</span></span><br><span class="line">visibility_of_any_elements_located(目标元素定位)	<span class="comment">#至少有一个</span></span><br><span class="line">invisibility_of_element_located(目标元素定位)	<span class="comment"># 是否未显示</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="脚本级等待机制"><a href="#脚本级等待机制" class="headerlink" title="脚本级等待机制"></a>脚本级等待机制</h2><blockquote>
+<p>在Selenium中，可以使用execute_async_script函数来执行异步JavaScript脚本，如果异步JavaScript脚本没有指定回调函数或者超过时间期限仍然没有调用回调函数，那么JavaScript脚本可能超时</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 异步超时时间</span></span><br><span class="line">wd.set_script_timeout(秒)</span><br></pre></td></tr></table></figure>
+
+<h1 id="对键盘和鼠标进行精准模拟"><a href="#对键盘和鼠标进行精准模拟" class="headerlink" title="对键盘和鼠标进行精准模拟"></a>对键盘和鼠标进行精准模拟</h1><h2 id="ActionChains操作链"><a href="#ActionChains操作链" class="headerlink" title="ActionChains操作链"></a>ActionChains操作链</h2><blockquote>
+<p><strong>ActionChains操作链</strong>：一种偏向底层的自动化交互方式，它可以实现鼠标移动、单击、右击、双击、鼠标按下或松开、悬停拖曳、按键按下或松开、按组合键等更复杂的操作。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium.webdriver.common.action_chains <span class="keyword">import</span> ActionChains</span><br><span class="line"></span><br><span class="line">ActionChains(webdriver实例)</span><br></pre></td></tr></table></figure>
+
+<p>操作链中包含两种类型的函数，第一种类型是操作设置函数，第二种类型是操作链执行函数（只有一个perform函数）。在调用perform时，将连续执行之前在操作链中设置的操作，然后结束操作链。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">ActionChains(wd).click(webElement).perform()</span><br><span class="line"></span><br><span class="line"><span class="comment"># .click()并不执行单击操作，而是对操作进行设置，相当于预约，在操作链中预约了一个单击操作</span></span><br><span class="line"><span class="comment"># .perform()：执行操作链中的所有操作（之前预约的click操作此时才会真正执行）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 链式操作方式，即每个函数都会返回ActionChains实例，以便继续调用ActionChains的操作设置函数，将多个操作组合在一起，形成一个完整的操作链，然后通过perform函数一起执行。</span></span><br><span class="line">ActionChains(wd)\</span><br><span class="line">	.click(webElement)\</span><br><span class="line">	.click(webElement)\</span><br><span class="line">    .click(webElement)\</span><br><span class="line">    .pause(<span class="number">3</span>)\</span><br><span class="line">    .perform()</span><br><span class="line"></span><br><span class="line">.reset_actions()	<span class="comment"># 清空操作链中的所有设置</span></span><br></pre></td></tr></table></figure>
+
+<p>ps: 操作链中涉及的所有WebElement元素在操作链执行时必须同时存在，且处于可操作状态，否则无法执行操作链</p>
+<h2 id="ActionChains支持的全部鼠标与键盘操作"><a href="#ActionChains支持的全部鼠标与键盘操作" class="headerlink" title="ActionChains支持的全部鼠标与键盘操作"></a>ActionChains支持的全部鼠标与键盘操作</h2><table>
+<thead>
+<tr>
+<th>函数名称</th>
+<th>参数</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>click</td>
+<td>element(目标元素可选)</td>
+<td>单击，如果没传入目标元素参数，则会单击当前位置</td>
+</tr>
+<tr>
+<td>context_click</td>
+<td>element(目标元素，可选)</td>
+<td>右键单击</td>
+</tr>
+<tr>
+<td>double_click</td>
+<td>element(目标元素，可选)</td>
+<td>双击</td>
+</tr>
+<tr>
+<td>click_and_hold</td>
+<td>element(目标元素，可选)</td>
+<td>单击按住</td>
+</tr>
+<tr>
+<td>release</td>
+<td></td>
+<td>释放</td>
+</tr>
+<tr>
+<td>move_to_element</td>
+<td>element</td>
+<td>移动到目标元素</td>
+</tr>
+</tbody></table>
+<p>键盘操作</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium.webdriver.common.keys <span class="keyword">import</span> Keys</span><br><span class="line"></span><br><span class="line">baiduSearchInput = driver.find_element(By.ID, <span class="string">&quot;kw&quot;</span>)</span><br><span class="line">baiduSearchInput.send_keys(<span class="string">&quot;hello world&quot;</span>)</span><br><span class="line">baiduSearchInput.send_keys(Keys.CONTROL, <span class="string">&quot;a&quot;</span>)	<span class="comment"># 全选</span></span><br><span class="line">baiduSearchInput.send_keys(Keys.CONTROL, <span class="string">&quot;x&quot;</span>)	<span class="comment"># 剪切</span></span><br><span class="line">baiduSearchInput.send_keys(Keys.CONTROL, <span class="string">&quot;v&quot;</span>)	<span class="comment"># 粘贴</span></span><br><span class="line">baiduSearchInput.send_keys(Keys.BACKSPACE)	<span class="comment"># 退格</span></span><br><span class="line">baiduSearchInput.send_keys(Keys.ENTER)</span><br><span class="line"></span><br><span class="line">ActionChains(wd)\</span><br><span class="line">	.key_down(Keys.CONTROL)\</span><br><span class="line">	.send_keys(<span class="string">&quot;a&quot;</span>)\</span><br><span class="line">	.key_up(Keys.CONTROL)\</span><br><span class="line">    .pause(<span class="number">3</span>)\</span><br><span class="line">    .perform()</span><br></pre></td></tr></table></figure>
+
+<p>ps: send_keys就足以胜任组合键操作，但它只支持按下操作，如果要实现精准控制，例如对某个键需要按下多少秒再松开，则只能使用ActionChains进行模拟，通过key_down、pause、key_up来精准控制某个键需要按下多少秒。</p>
+<h1 id="操作浏览器Cookie"><a href="#操作浏览器Cookie" class="headerlink" title="操作浏览器Cookie"></a>操作浏览器Cookie</h1><blockquote>
+<p>Selenium支持操作浏览器Cookie，包括Cookie的读取、新增和删除。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 读取</span></span><br><span class="line">wd.get_cookies()  <span class="comment">#获取所有的cookie对象集合</span></span><br><span class="line">wd.get_cookie(cookie名称)   <span class="comment">#根据名称获取单个cookie</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 新增</span></span><br><span class="line">wd.add_cookie(cookie对象)	<span class="comment"># 传入的cookie对象必须包含name和value两个属性</span></span><br><span class="line"><span class="comment"># 还有四个可选属性，分别为path、domain、secure、expiry</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除</span></span><br><span class="line">wd.delete_all_cookies()	<span class="comment">#删除全部cookie</span></span><br><span class="line">wd.delete_cookie(cookie名称)	<span class="comment">#按名称删除指定cookie</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="对浏览器窗口或元素截图"><a href="#对浏览器窗口或元素截图" class="headerlink" title="对浏览器窗口或元素截图"></a>对浏览器窗口或元素截图</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 对浏览器窗口截图</span></span><br><span class="line">wd.save_screenshot(截图文件保存路径)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 对元素截图</span></span><br><span class="line">wd.find_element(By.ID,<span class="string">&quot;su&quot;</span>).screenshot(路径)</span><br></pre></td></tr></table></figure>
+
+<h1 id="为Selenium操作附加自定义事件"><a href="#为Selenium操作附加自定义事件" class="headerlink" title="为Selenium操作附加自定义事件"></a>为Selenium操作附加自定义事件</h1><h2 id="EventFiringWebDriver"><a href="#EventFiringWebDriver" class="headerlink" title="EventFiringWebDriver"></a>EventFiringWebDriver</h2><blockquote>
+<p>EventFiringWebDriver，它可以为各类操作添加事件</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium.webdriver.support.event_firing_webdriver <span class="keyword">import</span> EventFiringWebDriver</span><br><span class="line"></span><br><span class="line">EventFiringWebDriver(WebDriver实例, AbstractEventListener实例)</span><br><span class="line"><span class="comment"># AbstractEventListener是一个抽象类，要使用EventFiringWebDriver，还需要设定自定义事件监听器类，该类必须继承并实现Selenium中的AbstractEventListener类</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 举例</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyListener</span>(<span class="title class_ inherited__">AbstractEventListener</span>):</span><br><span class="line">   <span class="keyword">def</span> <span class="title function_">before_navigate_to</span>(<span class="params">self, url, driver</span>):</span><br><span class="line">       <span class="built_in">print</span>(<span class="string">&quot;Before navigate to %s&quot;</span> % url)</span><br><span class="line">   <span class="keyword">def</span> <span class="title function_">after_navigate_to</span>(<span class="params">self, url, driver</span>):</span><br><span class="line">       <span class="built_in">print</span>(<span class="string">&quot;After navigate to %s&quot;</span> % url)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<h2 id="AbstractEventListener"><a href="#AbstractEventListener" class="headerlink" title="AbstractEventListener"></a>AbstractEventListener</h2><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>参数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>before_navigate_to(self,url,driver)</td>
+<td>url: 跳转的目标地址</td>
+<td>导航前事件，页面在发生跳转前执行的代码</td>
+</tr>
+<tr>
+<td>after_navigate_to(self,url,driver)</td>
+<td>driver: wd实例</td>
+<td>导航后事件，页面跳转后</td>
+</tr>
+<tr>
+<td>before_navigate_back(self,driver)</td>
+<td>driver: wd实例</td>
+<td>浏览器后退事件，后退操作前执行的代码</td>
+</tr>
+<tr>
+<td>after_navigate_back(self,driver)</td>
+<td>driver: wd实例</td>
+<td>浏览器后退事件，后退操作后执行的代码</td>
+</tr>
+<tr>
+<td>before_navigate_forward(self,driver)</td>
+<td>driver: wd实例</td>
+<td>浏览器前进事件，前进操作前执行的代码</td>
+</tr>
+<tr>
+<td>after_navigate_forward(self,driver)</td>
+<td>driver: wd实例</td>
+<td>浏览器前进事件，前进操作后执行的代码</td>
+</tr>
+<tr>
+<td>before_close(self,driver)</td>
+<td>…</td>
+<td>浏览器关闭事件，关闭前</td>
+</tr>
+<tr>
+<td>after_close(self,driver)</td>
+<td>…</td>
+<td>浏览器关闭事件，关闭后</td>
+</tr>
+<tr>
+<td>before_find(self,by,value,driver)</td>
+<td>by表示查找条件类型</td>
+<td>查找元素前事件</td>
+</tr>
+<tr>
+<td>after_find(self,by,value,driver)</td>
+<td>value表示查找值</td>
+<td>找到元素后事件</td>
+</tr>
+<tr>
+<td>before_click(self,element,driver)</td>
+<td>element表示操作的元素</td>
+<td>单击元素前事件</td>
+</tr>
+<tr>
+<td>after_click(self,element,driver)</td>
+<td>…</td>
+<td>单击元素后事件</td>
+</tr>
+<tr>
+<td>before_change_value_of(self,element,driver)</td>
+<td>…</td>
+<td>元素值变更前事件</td>
+</tr>
+<tr>
+<td>after_change_value_of(self,element,driver)</td>
+<td>…</td>
+<td>元素中变更后事件</td>
+</tr>
+<tr>
+<td>before_excute_script(self,script,driver)</td>
+<td>script表示需要执行的脚本</td>
+<td>脚本执行前事件</td>
+</tr>
+<tr>
+<td>after_excute_script(self,script,driver)</td>
+<td>…</td>
+<td>脚本执行后事件</td>
+</tr>
+</tbody></table>
+<h2 id="EventFiringWebElement"><a href="#EventFiringWebElement" class="headerlink" title="EventFiringWebElement"></a>EventFiringWebElement</h2><p>元素级自定义事件</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium.webdriver.support.event_firing_webdriver <span class="keyword">import</span> EventFiringWebElement</span><br><span class="line"></span><br><span class="line"><span class="comment"># EventFiringWebElement(WebElement实例, EventFiringWebDriver实例)</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyCustomListener</span>(<span class="title class_ inherited__">AbstractEventListener</span>):</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment"># 追踪搜索按钮的操作</span></span><br><span class="line">eventDriver = EventFiringWebDriver(driver, MyCustomListener())</span><br><span class="line">search_btn = EventFiringWebElement(driver.find_element(By.ID, <span class="string">&quot;su&quot;</span>), eventDriver)</span><br><span class="line">search_btn.click()</span><br><span class="line"><span class="comment"># 该元素被操作时触发</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="浏览器启动参数设置"><a href="#浏览器启动参数设置" class="headerlink" title="浏览器启动参数设置"></a>浏览器启动参数设置</h1><blockquote>
+<p>在创建WebDriver实例时，可以配置它的启动参数以进行一些初始设置。这些设置将会在WebDriver的整个生命周期内生效。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wd = webdriver.Chrome(executable_path=<span class="string">&#x27;chromedriver&#x27;</span>, port=<span class="number">0</span>, options=<span class="literal">None</span>, </span><br><span class="line">service_args=<span class="literal">None</span>, desired_capabilities=<span class="literal">None</span>, service_log_path=<span class="literal">None</span>, chrome_options=</span><br><span class="line"><span class="literal">None</span>, keep_alive=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>作用</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>options</td>
+<td>启动选项，自定义浏览器选项</td>
+<td>例如启用或禁用浏览器的特定功能，设置浏览器窗口的大小，配置代理服务器等。</td>
+</tr>
+<tr>
+<td>desired_capabilities</td>
+<td>类似于options</td>
+<td>主要在早期版本的Selenium中使用</td>
+</tr>
+<tr>
+<td>chrome_options</td>
+<td>完全等同于options</td>
+<td>该参数是早期版本Selenium使用的参数，现在的版本已不推荐使用</td>
+</tr>
+<tr>
+<td>executable_path</td>
+<td>浏览器驱动程序路径</td>
+<td>chrome.exe，如果没有指定，则默认使用环境变量PATH中设置的路径。</td>
+</tr>
+<tr>
+<td>service_args</td>
+<td>浏览器驱动程序的参数</td>
+<td>可以通过chromedriver –help命令查看驱动程序支持的参数</td>
+</tr>
+<tr>
+<td>port</td>
+<td>驱动程序启用的端口号</td>
+<td>如果不填写，则自动使用任意闲置的端口号。等同–port参数。</td>
+</tr>
+<tr>
+<td>service_log_path</td>
+<td>驱动程序存放日志文件的地址</td>
+<td>完全等同于chromedriver命令中的–log-path参数。</td>
+</tr>
+<tr>
+<td>keep_alive</td>
+<td>是否带上HTTP请求头</td>
+<td>Connection: keep-alive，即是否使用长连接。（该参数为布尔类型，默认值为True）。</td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium.webdriver.chrome.options <span class="keyword">import</span> Options</span><br><span class="line"></span><br><span class="line"><span class="comment"># 浏览器路径</span></span><br><span class="line">customOptions.binary_location=<span class="string">&quot;浏览器.exe路径&quot;</span></span><br><span class="line">customOptions.headless = <span class="literal">True</span>	<span class="comment">#无界面运行</span></span><br><span class="line">wd = webdriver.Chrome(options=customOptions)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 向浏览器添加命令行参数</span></span><br><span class="line">customOptions.add_argument(<span class="string">&quot;选项名称=选项值&quot;</span>)</span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">--user-agent=&quot;客户端代理类型&quot;：设置请求头的User-Agent，多用于响应式站点或根据User-Agent判断是否移动设备而返回不同网页的场景。</span></span><br><span class="line"><span class="string">--window-size=宽度值,高度值：设置浏览器的默认窗口大小。</span></span><br><span class="line"><span class="string">--headless：无界面运行（无窗口），通常用于远程运行，在本地也可加上该参数，提升运行效率。</span></span><br><span class="line"><span class="string">--start-maximized：设置浏览器默认以最大化窗口运行。</span></span><br><span class="line"><span class="string">--incognito：设置浏览器以隐身模式（无痕模式）运行。</span></span><br><span class="line"><span class="string">--disable-javascript：禁用JavaScript代码运行。</span></span><br><span class="line"><span class="string">--disable-infobars：禁用浏览器正在被自动化程序控制的提示。</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># extension,它可以为浏览器添加扩展插件,Chrome专用设定</span></span><br><span class="line">customOptions.add_extension(<span class="string">&quot;Chrome插件.crx文件路径&quot;</span>)</span><br><span class="line">customOptions.add_encoded_extension(<span class="string">&quot;Chrome插件文件经过Base64编码的字符串&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h1 id="通过JavaScript执行器进行深度操作"><a href="#通过JavaScript执行器进行深度操作" class="headerlink" title="通过JavaScript执行器进行深度操作"></a>通过JavaScript执行器进行深度操作</h1><blockquote>
+<p>虽然Selenium支持非常丰富的操作，但还是会遇到极少数无法处理的场景。此时可能需要使用JavaScript执行器来扩展Selenium。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 执行</span></span><br><span class="line">webdriver.execute_script(<span class="string">&quot;JavaScript脚本&quot;</span>, 自定义参数集（可选）) <span class="comment">#执行同步脚本</span></span><br><span class="line">webdriver.execute_async_script(<span class="string">&quot;JavaScript脚本&quot;</span>, 自定义参数集（可选）) <span class="comment">#执行异步脚本</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 实际上，将传入的JavaScript脚本以匿名函数的方式在浏览器中执行，以上脚本类似于以下代码。</span></span><br><span class="line">var anonymous = function () &#123;</span><br><span class="line">    Selenium传入的JavaScript脚本...</span><br><span class="line">&#125;;</span><br><span class="line">anonymous();</span><br></pre></td></tr></table></figure>
+
+<h2 id="执行同步脚本"><a href="#执行同步脚本" class="headerlink" title="执行同步脚本"></a>执行同步脚本</h2><h3 id="返回值与类型转换"><a href="#返回值与类型转换" class="headerlink" title="返回值与类型转换"></a>返回值与类型转换</h3><p>execute_script函数的返回值类型会随JavaScript脚本返回值动态改变</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&gt;------返回值为<span class="literal">None</span>的情况------</span><br><span class="line">&gt;脚本没有返回值的情况下，函数返回值为<span class="literal">None</span></span><br><span class="line">&gt;脚本返回值为null的情况下，函数返回值为<span class="literal">None</span></span><br><span class="line">&gt;脚本返回值为undefined的情况下，函数返回值为<span class="literal">None</span></span><br><span class="line">&gt;脚本返回值为NaN的情况下，函数返回值为<span class="literal">None</span></span><br><span class="line">&gt;脚本产生异常的情况下，函数返回值为<span class="literal">None</span></span><br><span class="line">&gt;------返回值为基础类型的情况------</span><br><span class="line">&gt;当脚本返回值为boolean时，函数返回值类型为&lt;<span class="keyword">class</span> <span class="string">&#x27;bool&#x27;</span>&gt;，示例值为<span class="literal">True</span></span><br><span class="line">&gt;当脚本返回值为<span class="built_in">int</span>时，函数返回值类型为&lt;<span class="keyword">class</span> <span class="string">&#x27;int&#x27;</span>&gt;，示例值为<span class="number">1</span></span><br><span class="line">&gt;当脚本返回值为<span class="built_in">float</span>时，函数返回值类型为&lt;<span class="keyword">class</span> <span class="string">&#x27;float&#x27;</span>&gt;，示例值为<span class="number">1.1</span></span><br><span class="line">&gt;当脚本返回值为string时，函数返回值类型为&lt;<span class="keyword">class</span> <span class="string">&#x27;str&#x27;</span>&gt;，示例值为hello world</span><br><span class="line">&gt;------返回值为引用类型的情况------</span><br><span class="line">&gt;当脚本返回值为array时，函数返回值类型为&lt;<span class="keyword">class</span> <span class="string">&#x27;list&#x27;</span>&gt;，示例值为[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line">&gt;当脚本返回值为<span class="built_in">object</span>时，函数返回值类型为&lt;<span class="keyword">class</span> <span class="string">&#x27;dict&#x27;</span>&gt;，示例值为&#123;<span class="string">&#x27;a&#x27;</span>: <span class="number">1</span>, <span class="string">&#x27;b&#x27;</span>: <span class="number">2</span>, <span class="string">&#x27;c&#x27;</span>: <span class="string">&#x27;cc&#x27;</span>&#125;</span><br><span class="line">&gt;当脚本返回值为function时，函数返回值类型为&lt;<span class="keyword">class</span> <span class="string">&#x27;dict&#x27;</span>&gt;，示例值为&#123;&#125;</span><br><span class="line">&gt;------返回值为HTML元素的情况------</span><br><span class="line">&gt;当脚本返回值为HTML元素时，函数返回值类型为&lt;<span class="keyword">class</span> <span class="string">&#x27;selenium.webdriver.remote.webelement. </span></span><br><span class="line"><span class="string">WebElement&#x27;</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<p>ps: 一般来说，不建议通过JavaScript来执行Selenium已经支持的功能。</p>
+<h3 id="传入参数"><a href="#传入参数" class="headerlink" title="传入参数"></a>传入参数</h3><p>execute_script函数还支持输入参数，然后在JavaScript脚本中通过arguments[0]、arguments[1]等使用这些参数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"><span class="keyword">from</span> selenium.webdriver.common.by <span class="keyword">import</span> By</span><br><span class="line"></span><br><span class="line">driver = webdriver.Chrome()</span><br><span class="line">driver.get(<span class="string">&quot;https://www.baidu.com&quot;</span>)</span><br><span class="line"></span><br><span class="line">keyword = <span class="string">&quot;hello world&quot;</span>;</span><br><span class="line">baiduSearchInput = driver.find_element(By.ID, <span class="string">&quot;kw&quot;</span>)</span><br><span class="line">baiduSearchInput.send_keys(keyword)</span><br><span class="line">driver.find_element(By.ID, <span class="string">&quot;su&quot;</span>).click()</span><br><span class="line"></span><br><span class="line">driver.execute_script(<span class="string">&quot;console.log(&#x27;搜索关键字为&#x27; + arguments[0] + &#x27;，当前百度搜索框的内容</span></span><br><span class="line"><span class="string">为&#x27; + arguments[1].value);&quot;</span>, keyword, baiduSearchInput)</span><br></pre></td></tr></table></figure>
+
+<h2 id="执行异步脚本"><a href="#执行异步脚本" class="headerlink" title="执行异步脚本"></a>执行异步脚本</h2><p>在使用该函数时，虽然JavaScript是异步处理的，但是Selenium脚本是同步执行的。如果Selenium回调函数没有执行，那么execute_async_script函数会处于阻塞状态，只有Selenium回调函数执行后才会执行下一行代码。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://shenyunmomie.github.io">shenyunmomie</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://shenyunmomie.github.io/2023/08/20/selenium-webdriver%E9%AB%98%E7%BA%A7%E8%BF%90%E7%94%A8/">http://shenyunmomie.github.io/2023/08/20/selenium-webdriver%E9%AB%98%E7%BA%A7%E8%BF%90%E7%94%A8/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://shenyunmomie.github.io" target="_blank">一个正常的人</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/selenium/">selenium</a><a class="post-meta__tags" href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/">自动化测试</a><a class="post-meta__tags" href="/tags/selenium-webdriver/">selenium webdriver</a><a class="post-meta__tags" href="/tags/%E9%AB%98%E7%BA%A7%E8%BF%90%E7%94%A8/">高级运用</a></div><div class="post_share"><div class="social-share" data-image="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082326081.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082328946.jpg" rel="external nofollow noreferrer" target="_blank"><img class="post-qr-code-img" src="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082328946.jpg" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/08/21/%E6%B5%8B%E8%AF%95%E5%AF%BC%E8%AE%BA/" title="测试导论"><img class="cover" src="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082326081.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">测试导论</div></div></a></div><div class="next-post pull-right"><a href="/2023/08/19/selenium-webdriver/" title="selenium_webdriver"><img class="cover" src="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082326081.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">selenium_webdriver</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/08/19/selenium-webdriver/" title="selenium_webdriver"><img class="cover" src="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082326081.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-08-19</div><div class="title">selenium_webdriver</div></div></a></div><div><a href="/2023/08/22/selenium%E6%B5%8B%E8%AF%95%E6%A1%88%E4%BE%8B%E8%AE%B2%E8%A7%A3/" title="selenium测试案例讲解"><img class="cover" src="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082326081.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-08-22</div><div class="title">selenium测试案例讲解</div></div></a></div><div><a href="/2023/08/18/selenium-IDE/" title="selenium_IDE"><img class="cover" src="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082326081.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-08-18</div><div class="title">selenium_IDE</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="lv-container" data-id="city" data-uid="MTAyMC81ODY4NS8zNTE0Nw=="></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082324841.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">shenyunmomie</div><div class="author-info__description">记录生活，分享知识</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">34</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">47</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><a id="card-info-btn" target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/shenyunmomie"><i class="fab fa-github"></i><span>关注我</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/shenyunmomie" rel="external nofollow noreferrer" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:18731548870@163.com" rel="external nofollow noreferrer" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#selenium%E7%9A%84%E7%AD%89%E5%BE%85%E6%9C%BA%E5%88%B6"><span class="toc-text">selenium的等待机制</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B5%E9%9D%A2%E7%BA%A7%E7%AD%89%E5%BE%85%E6%9C%BA%E5%88%B6"><span class="toc-text">页面级等待机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%83%E7%B4%A0%E7%BA%A7%E7%AD%89%E5%BE%85%E6%9C%BA%E5%88%B6"><span class="toc-text">元素级等待机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Selenium%E9%A2%84%E5%AE%9A%E4%B9%89%E7%AD%89%E5%BE%85%E6%9D%A1%E4%BB%B6%E5%87%BD%E6%95%B0"><span class="toc-text">Selenium预定义等待条件函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%84%9A%E6%9C%AC%E7%BA%A7%E7%AD%89%E5%BE%85%E6%9C%BA%E5%88%B6"><span class="toc-text">脚本级等待机制</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AF%B9%E9%94%AE%E7%9B%98%E5%92%8C%E9%BC%A0%E6%A0%87%E8%BF%9B%E8%A1%8C%E7%B2%BE%E5%87%86%E6%A8%A1%E6%8B%9F"><span class="toc-text">对键盘和鼠标进行精准模拟</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ActionChains%E6%93%8D%E4%BD%9C%E9%93%BE"><span class="toc-text">ActionChains操作链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ActionChains%E6%94%AF%E6%8C%81%E7%9A%84%E5%85%A8%E9%83%A8%E9%BC%A0%E6%A0%87%E4%B8%8E%E9%94%AE%E7%9B%98%E6%93%8D%E4%BD%9C"><span class="toc-text">ActionChains支持的全部鼠标与键盘操作</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E6%B5%8F%E8%A7%88%E5%99%A8Cookie"><span class="toc-text">操作浏览器Cookie</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AF%B9%E6%B5%8F%E8%A7%88%E5%99%A8%E7%AA%97%E5%8F%A3%E6%88%96%E5%85%83%E7%B4%A0%E6%88%AA%E5%9B%BE"><span class="toc-text">对浏览器窗口或元素截图</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%BASelenium%E6%93%8D%E4%BD%9C%E9%99%84%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6"><span class="toc-text">为Selenium操作附加自定义事件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#EventFiringWebDriver"><span class="toc-text">EventFiringWebDriver</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AbstractEventListener"><span class="toc-text">AbstractEventListener</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#EventFiringWebElement"><span class="toc-text">EventFiringWebElement</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE"><span class="toc-text">浏览器启动参数设置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%80%9A%E8%BF%87JavaScript%E6%89%A7%E8%A1%8C%E5%99%A8%E8%BF%9B%E8%A1%8C%E6%B7%B1%E5%BA%A6%E6%93%8D%E4%BD%9C"><span class="toc-text">通过JavaScript执行器进行深度操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%A7%E8%A1%8C%E5%90%8C%E6%AD%A5%E8%84%9A%E6%9C%AC"><span class="toc-text">执行同步脚本</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E5%80%BC%E4%B8%8E%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-text">返回值与类型转换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%A0%E5%85%A5%E5%8F%82%E6%95%B0"><span class="toc-text">传入参数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%A7%E8%A1%8C%E5%BC%82%E6%AD%A5%E8%84%9A%E6%9C%AC"><span class="toc-text">执行异步脚本</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/08/26/Appium/" title="Appium"><img src="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082326081.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Appium"/></a><div class="content"><a class="title" href="/2023/08/26/Appium/" title="Appium">Appium</a><time datetime="2023-08-26T03:32:34.000Z" title="发表于 2023-08-26 11:32:34">2023-08-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/08/22/%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6%E4%B9%8Bpytest/" title="测试框架之pytest"><img src="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082326081.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="测试框架之pytest"/></a><div class="content"><a class="title" href="/2023/08/22/%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6%E4%B9%8Bpytest/" title="测试框架之pytest">测试框架之pytest</a><time datetime="2023-08-22T04:35:53.000Z" title="发表于 2023-08-22 12:35:53">2023-08-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/08/22/selenium%E6%B5%8B%E8%AF%95%E6%A1%88%E4%BE%8B%E8%AE%B2%E8%A7%A3/" title="selenium测试案例讲解"><img src="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082326081.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="selenium测试案例讲解"/></a><div class="content"><a class="title" href="/2023/08/22/selenium%E6%B5%8B%E8%AF%95%E6%A1%88%E4%BE%8B%E8%AE%B2%E8%A7%A3/" title="selenium测试案例讲解">selenium测试案例讲解</a><time datetime="2023-08-22T04:08:28.000Z" title="发表于 2023-08-22 12:08:28">2023-08-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/08/21/%E6%B5%8B%E8%AF%95%E5%AF%BC%E8%AE%BA/" title="测试导论"><img src="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082326081.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="测试导论"/></a><div class="content"><a class="title" href="/2023/08/21/%E6%B5%8B%E8%AF%95%E5%AF%BC%E8%AE%BA/" title="测试导论">测试导论</a><time datetime="2023-08-21T02:42:36.000Z" title="发表于 2023-08-21 10:42:36">2023-08-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/08/20/selenium-webdriver%E9%AB%98%E7%BA%A7%E8%BF%90%E7%94%A8/" title="selenium_webdriver高级运用"><img src="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082326081.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="selenium_webdriver高级运用"/></a><div class="content"><a class="title" href="/2023/08/20/selenium-webdriver%E9%AB%98%E7%BA%A7%E8%BF%90%E7%94%A8/" title="selenium_webdriver高级运用">selenium_webdriver高级运用</a><time datetime="2023-08-20T07:07:19.000Z" title="发表于 2023-08-20 15:07:19">2023-08-20</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By shenyunmomie</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to my blog!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">簡</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>function loadLivere () {
+  if (typeof LivereTower === 'object') {
+    window.LivereTower.init()
+  }
+  else {
+    (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+  }
+}
+
+if ('Livere' === 'Livere' || !true) {
+  if (true) btf.loadComment(document.getElementById('lv-container'), loadLivere)
+  else loadLivere()
+}
+else {
+  function loadOtherComment () {
+    loadLivere()
+  }
+}</script></div><script src="/js/script.js?1"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div><!-- hexo injector body_end start --><script data-pjax>function electric_clock_injector_config(){
+                var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
+                var item_html = '<div class="card-widget card-clock"><div class="card-glass"><div class="card-background"><div class="card-content"><div id="hexo_electric_clock"><img id="card-clock-loading" src="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-clock/clock/images/weather/loading.gif" style="height: 120px; width: 100%;" data-ll-status="loading" class="entered loading"></div></div></div></div></div>';
+                console.log('已挂载electric_clock')
+                // parent_div_git.innerHTML=item_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",item_html) // 有报错，但不影响使用(支持pjax跳转)
+            }if( document.getElementsByClassName('sticky_layout')[0] && (location.pathname ==='all'|| 'all' ==='all')){
+
+            electric_clock_injector_config()
+        } </script><script src="https://pv.sohu.com/cityjson?ie=utf-8"></script><script data-pjax  src="https://cdn.jsdelivr.net/gh/Zfour/hexo-electric-clock@1.0.6/clock.js"></script><!-- hexo injector body_end end --></body></html>
