@@ -1,0 +1,258 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>数据结构之散列表 | 一个正常的人</title><meta name="author" content="shenyunmomie"><meta name="copyright" content="shenyunmomie"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="[TOC] 散列散列表是元素集合，其中的元素以一种便于查找的方式存储。散列表中的每个位置通常被称为槽，其中可以存储一个元素。   散列函数将散列表中的元素与其所属位置对应起来 例如：取余函数%11   将计算出的散列值插入散列表的对应位置   **载荷因子(λ)**：散列表的占用率 散列冲突：元素77在散列表的0位置，如果再来一个元素44，它的散列值也是0。将两个元素都放入同一个槽，这种情况被称作">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构之散列表">
+<meta property="og:url" content="http://shenyunmomie.github.io/2023/09/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E6%95%A3%E5%88%97%E8%A1%A8/index.html">
+<meta property="og:site_name" content="一个正常的人">
+<meta property="og:description" content="[TOC] 散列散列表是元素集合，其中的元素以一种便于查找的方式存储。散列表中的每个位置通常被称为槽，其中可以存储一个元素。   散列函数将散列表中的元素与其所属位置对应起来 例如：取余函数%11   将计算出的散列值插入散列表的对应位置   **载荷因子(λ)**：散列表的占用率 散列冲突：元素77在散列表的0位置，如果再来一个元素44，它的散列值也是0。将两个元素都放入同一个槽，这种情况被称作">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082326081.jpg">
+<meta property="article:published_time" content="2023-09-08T03:34:44.000Z">
+<meta property="article:modified_time" content="2023-09-09T17:36:21.396Z">
+<meta property="article:author" content="shenyunmomie">
+<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="散列表">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082326081.jpg"><link rel="shortcut icon" href="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082323164.png"><link rel="canonical" href="http://shenyunmomie.github.io/2023/09/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E6%95%A3%E5%88%97%E8%A1%A8/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="/css/iconfont.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '数据结构之散列表',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-09-10 01:36:21'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/style.css?1"><link rel="stylesheet" href="/css/iconfont.css?1"><link rel="stylesheet" href="//at.alicdn.com/t/c/font_4157962_euqnjj65mt.css"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Zfour/hexo-electric-clock@1.0.6/clock.css"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082324841.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">42</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">53</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 档案</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情连接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-icon-error-fill"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082326081.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="一个正常的人"><img class="site-icon" src="/img/logo1.jpg"/><span class="site-name">一个正常的人</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 档案</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情连接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-icon-error-fill"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">数据结构之散列表</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-09-08T03:34:44.000Z" title="发表于 2023-09-08 11:34:44">2023-09-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-09-09T17:36:21.396Z" title="更新于 2023-09-10 01:36:21">2023-09-10</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">数据结构学习笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>6分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="数据结构之散列表"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>[TOC]</p>
+<h1 id="散列"><a href="#散列" class="headerlink" title="散列"></a>散列</h1><p><strong>散列表</strong>是元素集合，其中的元素以一种便于查找的方式存储。散列表中的每个位置通常被称为槽，其中可以存储一个元素。</p>
+<img src="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202309081219108.png" alt="image-20230908121924791" style="zoom:67%;" />
+
+<p><strong>散列函数</strong>将散列表中的元素与其所属位置对应起来</p>
+<p>例如：取余函数%11</p>
+<img src="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202309081220593.png" alt="image-20230908122007463" style="zoom: 80%;" />
+
+<p>将计算出的散列值插入散列表的对应位置</p>
+<img src="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202309081221028.png" alt="image-20230908122117579" style="zoom:67%;" />
+
+<p>**载荷因子(λ)**：散列表的占用率</p>
+<p><strong>散列冲突</strong>：元素77在散列表的0位置，如果再来一个元素44，它的散列值也是0。将两个元素都放入同一个槽，这种情况被称作冲突，也叫“碰撞”</p>
+<p><strong>完美散列函数</strong>：给定一个元素集合，能将每个元素映射到不同的槽，这种散列函数称作完美散列函数。</p>
+<p>​		如果元素已知，并且集合不变，那么构建完美散列函数是可能的。</p>
+<p>​		不幸的是，给定任意一个元素集合，没有系统化方法来保证散列函数是完美的。</p>
+<p><strong>散列函数要求</strong>：冲突数最少，计算方便，元素均匀分布于散列表中。</p>
+<p><strong>构建完美散列函数方法</strong>：</p>
+<ul>
+<li>增大散列表：使之能容纳每一个元素，这样就能保证每个元素都有属于自己的槽，元素多时候不可取</li>
+</ul>
+<p>散列函数一定要高效，以免它成为存储和搜索过程的负担。如果散列函数过于复杂，计算槽编号的工作量可能比在进行顺序搜索或二分搜索时的更大，这可不是散列的初衷。</p>
+<ul>
+<li><input disabled="" type="checkbox"> 举例：字符串</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 字符串：unicode编码求和，再取余数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">hash</span>(<span class="params">astring,tablesize</span>):</span><br><span class="line">    <span class="built_in">sum</span> = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> s <span class="keyword">in</span> astring:</span><br><span class="line">        <span class="built_in">sum</span> = <span class="built_in">sum</span> + <span class="built_in">ord</span>(s)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">sum</span>%tablesize</span><br><span class="line"></span><br><span class="line"><span class="comment"># astr = &#x27;cat&#x27;</span></span><br><span class="line"><span class="comment"># print(hash(astr, 11))</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 对异序词，这个散列函数总是得到相同的散列值</span></span><br><span class="line"><span class="comment"># 所以用字符位置作为权重因子</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">hash</span>(<span class="params">astring,tablesize</span>):</span><br><span class="line">    <span class="built_in">sum</span> = <span class="number">0</span></span><br><span class="line">    count = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> s <span class="keyword">in</span> astring:</span><br><span class="line">        count += <span class="number">1</span></span><br><span class="line">        <span class="built_in">sum</span> = <span class="built_in">sum</span> + <span class="built_in">ord</span>(s) * count</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">sum</span>%tablesize</span><br><span class="line"><span class="comment"># astr = &#x27;cta&#x27;</span></span><br><span class="line"><span class="comment"># print(hash(astr, 11))</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="散列冲突"><a href="#散列冲突" class="headerlink" title="散列冲突"></a>散列冲突</h2><p>当两个元素被分到同一个槽中时，必须通过一种系统化方法在散列表中安置第二个元素。这个过程被称为处理冲突。</p>
+<p><strong>再散列</strong>泛指在发生冲突后寻找另一个槽的过程。</p>
+<ul>
+<li><input disabled="" type="checkbox"> 一种方法是在散列表中找到另一个空槽，用于放置引起冲突的元素。</li>
+</ul>
+<p>简单的做法是从起初的散列值开始，顺序遍历散列表，直到找到一个空槽。注意，为了遍历散列表，可能需要往回检查第一个槽。这个过程被称为<strong>开放定址法</strong>，它尝试在散列表中寻找下一个空槽或地址。由于是逐个访问槽，因此这个做法被称作<strong>线性探测</strong>。</p>
+<img src="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202309081221028.png" alt="image-20230908122117579" style="zoom:67%;" />
+
+<p>在这个散列表中，如果我们添加新元素44，它的散列值是0，但0已有元素77，根据线性探测，我们将把44存储在下一个None位置，也就是1中，如果再添加新元素55，则会放在2中。</p>
+<p>当然，查找会产生额外开销，比如找55时，我们根据散列值0查到了77，值不匹配，说明可能存在散列冲突，随后进行线性搜索，1位置44，不匹配，2位置55，返回True。如果查找不存在的元素66，当我们搜索的3位置是个None时，也就是<strong>遇到空槽</strong>，就说明元素不存在，返回False。</p>
+<p>线性探测有个缺点，那就是会使散列表中的元素出现<strong>聚集现象</strong>。也就是说，如果一个槽发生太多冲突，线性探测会填满其附近的槽，而这会影响到后续插入的元素。</p>
+<p><strong>扩展线性探测</strong>，不再依次顺序查找空槽，而是跳过(skip)一些槽，这样做能使引起冲突的元素分布得更均匀。“跨步”（skip）的大小要能保证表中所有的槽最终都被访问到，否则就会浪费槽资源。<strong>所以建议散列表的大小为素数</strong></p>
+<p><strong>平方探测</strong>是线性探测的一个变体，它不采用固定的跨步大小，而是通过再散列函数递增散列值。如果第一个散列值是h，后续的散列值就是h+1、h+4、h+9、h+16</p>
+<ul>
+<li><input disabled="" type="checkbox"> 另一种处理冲突的方法是让每个槽有一个指向元素集合（或链表）的引用</li>
+</ul>
+<p><strong>链接法</strong>允许散列表中的同一个位置上存在多个元素。发生冲突时，元素仍然被插入其散列值对应的槽中。不过，随着同一个位置上的元素越来越多，搜索变得越来越困难。</p>
+<h2 id="实现映射抽象数据类型"><a href="#实现映射抽象数据类型" class="headerlink" title="实现映射抽象数据类型"></a>实现映射抽象数据类型</h2><p>字典是存储键-值对的数据类型。键用来查找关联的值，这个概念常常被称作<strong>映射</strong>。</p>
+<p>python中的字典的存储结构就是由散列表实现的，这里通过映射类型进行说明。</p>
+<p>映射抽象数据类型定义如下。它是将键和值关联起来的无序集合，其中的键是不重复的，键和值之间是一一对应的关系。映射支持以下操作。</p>
+<ul>
+<li>Map()：创建一个空的映射，它返回一个空的映射集合。</li>
+<li>put(key, val)：往映射中加入一个新的键-值对。如果键已经存在，就用新值替换旧值。</li>
+<li>get(key)：返回key对应的值。如果key不存在，则返回None。</li>
+<li>del：通过del map[key]这样的语句从映射中删除键-值对。</li>
+<li>len()：返回映射中存储的键-值对的数目。</li>
+<li>in：通过key in map这样的语句，在键存在时返回True，否则返回False。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 映射抽象数据类型:键值对字典</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">hashTalbe</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        self.size = <span class="number">11</span></span><br><span class="line">        self.slots = [<span class="literal">None</span>] * self.size</span><br><span class="line">        self.data = [<span class="literal">None</span>] * self.size</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">hashfunction</span>(<span class="params">self,key</span>):</span><br><span class="line">        <span class="keyword">return</span> key%self.size</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">refresh</span>(<span class="params">self,oldhash</span>):</span><br><span class="line">        <span class="keyword">return</span> (oldhash+<span class="number">1</span>)%self.size</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">put</span>(<span class="params">self,key,data</span>):</span><br><span class="line">        hashValue = self.hashfunction(key)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> self.slots[hashValue] <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            self.slots[hashValue] = key</span><br><span class="line">            self.data[hashValue] = data</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">if</span> self.slots[hashValue] == key:</span><br><span class="line">                self.data[hashValue] = data</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                newhash = self.refresh(hashValue)</span><br><span class="line">                <span class="keyword">while</span> newhash != hashValue:</span><br><span class="line">                    <span class="keyword">if</span> self.slots[newhash] <span class="keyword">is</span> <span class="literal">None</span> <span class="keyword">or</span> self.slots[newhash] == key:</span><br><span class="line">                        self.slots[newhash] = key</span><br><span class="line">                        self.data[newhash] = data</span><br><span class="line">                        <span class="keyword">break</span></span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        newhash = self.refresh(newhash)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get</span>(<span class="params">self,key</span>):</span><br><span class="line">        hashValue = self.hashfunction(key)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> self.slots[hashValue] == key:</span><br><span class="line">            <span class="keyword">return</span> self.data[hashValue]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            newhash = self.refresh(hashValue)</span><br><span class="line">            <span class="keyword">while</span> newhash != hashValue <span class="keyword">and</span> self.slots[newhash] != <span class="literal">None</span>:</span><br><span class="line">                <span class="keyword">if</span> self.slots[newhash] == key:</span><br><span class="line">                    <span class="keyword">return</span> self.data[newhash]</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    newhash = self.refresh(newhash)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__getitem__</span>(<span class="params">self, key</span>):</span><br><span class="line">        <span class="keyword">return</span> self.get(key)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__setitem__</span>(<span class="params">self, key, value</span>):</span><br><span class="line">        <span class="keyword">return</span> self.put(key,value)</span><br></pre></td></tr></table></figure>
+
+<h2 id="散列搜索算法"><a href="#散列搜索算法" class="headerlink" title="散列搜索算法"></a>散列搜索算法</h2><p>在最好情况下，散列搜索算法的时间复杂度是O(1)，即常数阶。然而，因为可能发生冲突，所以比较次数通常不会这么简单</p>
+<p><em>在分析散列表的使用情况时，最重要的信息就是载荷因子λ。从概念上来说，如果λ很小，那么发生冲突的概率就很小，元素也就很有可能各就各位。如果λ很大，则意味着散列表很拥挤，发生冲突的概率也就很大。</em></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://shenyunmomie.github.io">shenyunmomie</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://shenyunmomie.github.io/2023/09/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E6%95%A3%E5%88%97%E8%A1%A8/">http://shenyunmomie.github.io/2023/09/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E6%95%A3%E5%88%97%E8%A1%A8/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://shenyunmomie.github.io" target="_blank">一个正常的人</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><a class="post-meta__tags" href="/tags/%E6%95%A3%E5%88%97%E8%A1%A8/">散列表</a></div><div class="post_share"><div class="social-share" data-image="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082326081.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082328946.jpg" rel="external nofollow noreferrer" target="_blank"><img class="post-qr-code-img" src="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082328946.jpg" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2023/09/07/%E7%AE%97%E6%B3%95%E4%B9%8B%E6%90%9C%E7%B4%A2%E5%92%8C%E6%8E%92%E5%BA%8F/" title="算法之搜索和排序"><img class="cover" src="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082326081.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">算法之搜索和排序</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/09/04/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E6%A0%88%E3%80%81%E9%98%9F%E5%88%97%E5%92%8C%E9%80%92%E5%BD%92/" title="数据结构之栈、队列和递归"><img class="cover" src="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082326081.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-04</div><div class="title">数据结构之栈、队列和递归</div></div></a></div><div><a href="/2023/08/31/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E7%BA%BF%E6%80%A7%E8%A1%A8/" title="数据结构之线性表"><img class="cover" src="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082326081.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-08-31</div><div class="title">数据结构之线性表</div></div></a></div><div><a href="/2023/08/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%A6%82%E8%BF%B0/" title="数据结构概述"><img class="cover" src="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082326081.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-08-28</div><div class="title">数据结构概述</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="lv-container" data-id="city" data-uid="MTAyMC81ODY4NS8zNTE0Nw=="></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082324841.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">shenyunmomie</div><div class="author-info__description">记录生活，分享知识</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">42</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">53</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><a id="card-info-btn" target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/shenyunmomie"><i class="fab fa-github"></i><span>关注我</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/shenyunmomie" rel="external nofollow noreferrer" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:18731548870@163.com" rel="external nofollow noreferrer" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%A3%E5%88%97"><span class="toc-text">散列</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%A3%E5%88%97%E5%86%B2%E7%AA%81"><span class="toc-text">散列冲突</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E6%98%A0%E5%B0%84%E6%8A%BD%E8%B1%A1%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">实现映射抽象数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%A3%E5%88%97%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95"><span class="toc-text">散列搜索算法</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/09/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E6%95%A3%E5%88%97%E8%A1%A8/" title="数据结构之散列表"><img src="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082326081.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数据结构之散列表"/></a><div class="content"><a class="title" href="/2023/09/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E6%95%A3%E5%88%97%E8%A1%A8/" title="数据结构之散列表">数据结构之散列表</a><time datetime="2023-09-08T03:34:44.000Z" title="发表于 2023-09-08 11:34:44">2023-09-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/09/07/%E7%AE%97%E6%B3%95%E4%B9%8B%E6%90%9C%E7%B4%A2%E5%92%8C%E6%8E%92%E5%BA%8F/" title="算法之搜索和排序"><img src="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082326081.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="算法之搜索和排序"/></a><div class="content"><a class="title" href="/2023/09/07/%E7%AE%97%E6%B3%95%E4%B9%8B%E6%90%9C%E7%B4%A2%E5%92%8C%E6%8E%92%E5%BA%8F/" title="算法之搜索和排序">算法之搜索和排序</a><time datetime="2023-09-07T08:37:37.000Z" title="发表于 2023-09-07 16:37:37">2023-09-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/09/07/%E7%AE%97%E6%B3%95%E4%B9%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" title="算法之动态规划"><img src="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082326081.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="算法之动态规划"/></a><div class="content"><a class="title" href="/2023/09/07/%E7%AE%97%E6%B3%95%E4%B9%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" title="算法之动态规划">算法之动态规划</a><time datetime="2023-09-06T17:33:28.000Z" title="发表于 2023-09-07 01:33:28">2023-09-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/09/05/python%E4%B9%8B%E5%86%85%E7%BD%AE%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" title="python之内置数据类型"><img src="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082326081.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="python之内置数据类型"/></a><div class="content"><a class="title" href="/2023/09/05/python%E4%B9%8B%E5%86%85%E7%BD%AE%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" title="python之内置数据类型">python之内置数据类型</a><time datetime="2023-09-05T03:50:10.000Z" title="发表于 2023-09-05 11:50:10">2023-09-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/09/04/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E6%A0%88%E3%80%81%E9%98%9F%E5%88%97%E5%92%8C%E9%80%92%E5%BD%92/" title="数据结构之栈、队列和递归"><img src="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307082326081.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数据结构之栈、队列和递归"/></a><div class="content"><a class="title" href="/2023/09/04/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E6%A0%88%E3%80%81%E9%98%9F%E5%88%97%E5%92%8C%E9%80%92%E5%BD%92/" title="数据结构之栈、队列和递归">数据结构之栈、队列和递归</a><time datetime="2023-09-04T04:02:20.000Z" title="发表于 2023-09-04 12:02:20">2023-09-04</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By shenyunmomie</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to my blog!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">簡</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>function loadLivere () {
+  if (typeof LivereTower === 'object') {
+    window.LivereTower.init()
+  }
+  else {
+    (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+  }
+}
+
+if ('Livere' === 'Livere' || !true) {
+  if (true) btf.loadComment(document.getElementById('lv-container'), loadLivere)
+  else loadLivere()
+}
+else {
+  function loadOtherComment () {
+    loadLivere()
+  }
+}</script></div><script src="/js/script.js?1"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div><!-- hexo injector body_end start --><script data-pjax>function electric_clock_injector_config(){
+                var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
+                var item_html = '<div class="card-widget card-clock"><div class="card-glass"><div class="card-background"><div class="card-content"><div id="hexo_electric_clock"><img id="card-clock-loading" src="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-clock/clock/images/weather/loading.gif" style="height: 120px; width: 100%;" data-ll-status="loading" class="entered loading"></div></div></div></div></div>';
+                console.log('已挂载electric_clock')
+                // parent_div_git.innerHTML=item_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",item_html) // 有报错，但不影响使用(支持pjax跳转)
+            }if( document.getElementsByClassName('sticky_layout')[0] && (location.pathname ==='all'|| 'all' ==='all')){
+
+            electric_clock_injector_config()
+        } </script><script src="https://pv.sohu.com/cityjson?ie=utf-8"></script><script data-pjax  src="https://cdn.jsdelivr.net/gh/Zfour/hexo-electric-clock@1.0.6/clock.js"></script><!-- hexo injector body_end end --></body></html>
