@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>测试工程师入门知识</title>
+      <link href="/2023/09/12/%E6%B5%8B%E8%AF%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E5%85%A5%E9%97%A8%E7%9F%A5%E8%AF%86/"/>
+      <url>/2023/09/12/%E6%B5%8B%E8%AF%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E5%85%A5%E9%97%A8%E7%9F%A5%E8%AF%86/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>数据结构之散列表</title>
       <link href="/2023/09/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E6%95%A3%E5%88%97%E8%A1%A8/"/>
       <url>/2023/09/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E6%95%A3%E5%88%97%E8%A1%A8/</url>
@@ -524,9 +537,9 @@
             
             <tag> python </tag>
             
-            <tag> 魔术方法 </tag>
-            
             <tag> 笔记 </tag>
+            
+            <tag> 魔术方法 </tag>
             
         </tags>
       
@@ -761,9 +774,9 @@
             
             <tag> python </tag>
             
-            <tag> 笔记 </tag>
-            
             <tag> sys模块 </tag>
+            
+            <tag> 笔记 </tag>
             
             <tag> python解释器 </tag>
             
@@ -954,11 +967,11 @@
     
     
     <entry>
-      <title>访问网站背后过程</title>
-      <link href="/2023/07/09/%E8%AE%BF%E9%97%AE%E7%BD%91%E7%AB%99%E8%83%8C%E5%90%8E%E8%BF%87%E7%A8%8B/"/>
-      <url>/2023/07/09/%E8%AE%BF%E9%97%AE%E7%BD%91%E7%AB%99%E8%83%8C%E5%90%8E%E8%BF%87%E7%A8%8B/</url>
+      <title>计算机网络基础知识</title>
+      <link href="/2023/07/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+      <url>/2023/07/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</url>
       
-        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="访问网站背后过程"><a href="#访问网站背后过程" class="headerlink" title="访问网站背后过程"></a>访问网站背后过程</h1><blockquote><p>解释访问过程之前，首先要了解<strong>计算机网络的基础知识</strong>和<strong>网站部署过程</strong></p></blockquote><h2 id="计算机网络基础知识"><a href="#计算机网络基础知识" class="headerlink" title="计算机网络基础知识"></a>计算机网络基础知识</h2><p>主要了解TCP五层模型：<a href="/2023/07/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="计算机网络基础知识">相关文章链接，点击这里</a></p><h2 id="网站是如何部署的？"><a href="#网站是如何部署的？" class="headerlink" title="网站是如何部署的？"></a>网站是如何部署的？</h2><ol><li>准备服务器：首先，需要选择一个安全可靠的服务器，购买服务器的空间，包括服务器类型、带宽、存储空间和机房等。</li><li>配置环境：安装服务器所需的操作系统、Web 服务器（如Apache、Nginx等）和数据库（如MySQL、PostgreSQL、MongoDB等）等必要组件，配置相关的服务。</li><li>部署代码：将编写好的网站代码上传至服务器，通过Web服务器将代码部署到服务器上。此时，通常需要将网站的<strong>域名</strong>和<strong>IP地址</strong>绑定，使访问该域名的用户能够正确访问该网站。</li><li>域名购买和解析：在国内购买域名，并在 DNS 解析商处将域名解析到服务器的 IP 地址上。</li><li>网站备案：在国内部署网站，需要进行备案手续，主要包括备案材料的准备以及在当地官方网站进行系统备案。</li><li>数据库配置：如果网站使用了数据库，将需要创建网站对应的数据库、配置数据库连接和数据表等基础操作。</li><li>调试：部署完成后，需要进行测试和调试，包括测试网站在不同浏览器下的兼容性、测试代码的漏洞和安全性、测试服务器的稳定性和性能等等。</li></ol><h2 id="网站的访问过程经历哪些步骤"><a href="#网站的访问过程经历哪些步骤" class="headerlink" title="网站的访问过程经历哪些步骤"></a>网站的访问过程经历哪些步骤</h2><h3 id="DNS域名解析协议"><a href="#DNS域名解析协议" class="headerlink" title="DNS域名解析协议"></a>DNS域名解析协议</h3><blockquote><p>将域名解析为ip地址。</p></blockquote><ul><li><input disabled="" type="checkbox"> 什么是DNS？<ul><li>一个由分层的DNS服务器实现的分布式数据库</li><li>一个使得主机能够查询分布式数据库的应用层协议</li></ul></li></ul><p>DNS通常是由其他应用层协议所使用的，包括HTTP、SMTP和FTP，</p><h3 id="TCP三次握手"><a href="#TCP三次握手" class="headerlink" title="TCP三次握手"></a>TCP三次握手</h3><p><img src="C:\Users\神殒魔灭\AppData\Roaming\Typora\typora-user-images\image-20230624000722342.png" alt="image-20230624000722342"></p><h3 id="HTTP请求"><a href="#HTTP请求" class="headerlink" title="HTTP请求"></a>HTTP请求</h3><blockquote><p>这个请求中包含了请求的方式（GET或POST）、请求头（告诉服务器浏览器的类型、支持的压缩格式等信息）和请求体（如果是POST请求，将提交数据）。</p></blockquote><h3 id="服务器响应"><a href="#服务器响应" class="headerlink" title="服务器响应"></a>服务器响应</h3><blockquote><p>一旦服务器收到请求，它会进行处理并返回响应。响应也包含了HTTP状态码（如200表示成功，404表示未找到页面等）和响应头（如服务器类型、响应时间和数据类型等信息）。</p></blockquote><h3 id="接收响应"><a href="#接收响应" class="headerlink" title="接收响应"></a>接收响应</h3><blockquote><p> 一旦浏览器收到响应，它会对响应进行处理和解析，并将结果渲染在用户界面中。</p></blockquote><h3 id="断开连接"><a href="#断开连接" class="headerlink" title="断开连接"></a>断开连接</h3><blockquote><p>一旦所有数据都传输完毕，浏览器会关闭TCP连接，释放资源，此时用户与服务器的通信就结束了</p></blockquote>]]></content>
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="计算机网络基础知识"><a href="#计算机网络基础知识" class="headerlink" title="计算机网络基础知识"></a>计算机网络基础知识</h1><h2 id="核心概念"><a href="#核心概念" class="headerlink" title="核心概念"></a>核心概念</h2><ul><li><p><input checked="" disabled="" type="checkbox"> 什么是因特网？</p><ul><li>从因特网构成角度：它是一个互联了全世界数十亿计算机设备的网络。这些设备被称为<strong>主机</strong>或<strong>端系统</strong>。<ul><li>端系统通过<strong>通信链路</strong>和<strong>分组交换机</strong>连接到一起</li><li>分组交换机中最著名的两种类型是<strong>路由器</strong>和<strong>链路交换机</strong></li><li>端系统通过<strong>因特网服务提供商</strong>接入因特网</li><li><strong>协议</strong>控制因特网信息的接收和发送</li></ul></li><li>从为应用程序提供基础设施服务角度：<ul><li>套接字接口(socket interface)是一种端系统之间交付数据的方式，类似邮件要写清地址。</li></ul></li></ul></li><li><p><input checked="" disabled="" type="checkbox"> 什么是协议？</p><p>协议定义了两个通信实体之间交换的报文的格式和顺序，以及报文发送或接收一条报文或其他事件所采取的动作。</p></li></ul><h2 id="计算机网络的部件"><a href="#计算机网络的部件" class="headerlink" title="计算机网络的部件"></a>计算机网络的部件</h2><ul><li><p>端系统包括桌面计算机、服务器和移动计算机等。</p></li><li><p>主机被划分为客户(client)和服务器(server)</p></li><li><p><input checked="" disabled="" type="checkbox"> 什么是接入网？</p><p>将端系统物理连接到<strong>边缘路由器</strong>的网络称为接入网。边缘路由器是通信路径上的第一台路由器。</p></li></ul><h2 id="分组交换"><a href="#分组交换" class="headerlink" title="分组交换"></a>分组交换</h2><h2 id="协议"><a href="#协议" class="headerlink" title="协议"></a>协议</h2><h3 id="TCP五层模型"><a href="#TCP五层模型" class="headerlink" title="TCP五层模型"></a>TCP五层模型</h3><ol><li><p>应用层</p><ul><li>HTTP：Web文档请求和传送</li><li>SMTP：电子邮件报文的传输</li><li>FTP：两个端系统间的文件传送</li><li>DNS：用于域名解析，将域名转换为IP地址</li></ul></li><li><p>运输层</p><blockquote><p>提供端到端的数据传输服务。</p><p>它为应用程序提供了可靠、流畅的数据传输服务，并在网络传输过程中保证数据的正确性和可靠性。</p></blockquote><ul><li>TCP：传输控制协议，可靠的、面向连接的数据传输服务。它将数据分割成报文段，并提供流量控制、拥塞控制、序号管理和重传机制等功能。</li><li>UDP：用户数据报协议，无连接的数据传输服务，它不保证数据传输的正确性和可靠性，但具有快速、轻量的优点，常用于实现音频、视频和网络游戏等实时应用。</li></ul></li><li><p>网络层</p><blockquote><p>负责将称为<strong>数据报</strong>的网络层分组从一台主机移动到另一台主机。</p></blockquote><ul><li>IP：互联网协议，定义数据报中各字段的作用</li><li>ARP：地址解析协议</li><li>RARP：逆地址解析协议</li></ul></li><li><p>链路层</p><blockquote><p>负责在相邻节点间传送数据帧，并提供一些错误监测和矫正功能。</p></blockquote><ul><li>Ethernet：以太网协议</li><li>Wi-Fi：无线协议</li></ul></li><li><p>物理层</p><blockquote><p>负责在物理媒介上传输比特流。</p></blockquote></li></ol><h3 id="OSI七层模型"><a href="#OSI七层模型" class="headerlink" title="OSI七层模型"></a>OSI七层模型</h3><blockquote><p>应用层、表示层、会话层、运输层、网络层、数据链路层、物理层</p></blockquote><p><img src="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307091857461.png" alt="image-20230622212604893"></p><p><img src="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307091857774.png" alt="image-20230622212652909"></p>]]></content>
       
       
       <categories>
@@ -979,11 +992,11 @@
     
     
     <entry>
-      <title>计算机网络基础知识</title>
-      <link href="/2023/07/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
-      <url>/2023/07/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</url>
+      <title>访问网站背后过程</title>
+      <link href="/2023/07/09/%E8%AE%BF%E9%97%AE%E7%BD%91%E7%AB%99%E8%83%8C%E5%90%8E%E8%BF%87%E7%A8%8B/"/>
+      <url>/2023/07/09/%E8%AE%BF%E9%97%AE%E7%BD%91%E7%AB%99%E8%83%8C%E5%90%8E%E8%BF%87%E7%A8%8B/</url>
       
-        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="计算机网络基础知识"><a href="#计算机网络基础知识" class="headerlink" title="计算机网络基础知识"></a>计算机网络基础知识</h1><h2 id="核心概念"><a href="#核心概念" class="headerlink" title="核心概念"></a>核心概念</h2><ul><li><p><input checked="" disabled="" type="checkbox"> 什么是因特网？</p><ul><li>从因特网构成角度：它是一个互联了全世界数十亿计算机设备的网络。这些设备被称为<strong>主机</strong>或<strong>端系统</strong>。<ul><li>端系统通过<strong>通信链路</strong>和<strong>分组交换机</strong>连接到一起</li><li>分组交换机中最著名的两种类型是<strong>路由器</strong>和<strong>链路交换机</strong></li><li>端系统通过<strong>因特网服务提供商</strong>接入因特网</li><li><strong>协议</strong>控制因特网信息的接收和发送</li></ul></li><li>从为应用程序提供基础设施服务角度：<ul><li>套接字接口(socket interface)是一种端系统之间交付数据的方式，类似邮件要写清地址。</li></ul></li></ul></li><li><p><input checked="" disabled="" type="checkbox"> 什么是协议？</p><p>协议定义了两个通信实体之间交换的报文的格式和顺序，以及报文发送或接收一条报文或其他事件所采取的动作。</p></li></ul><h2 id="计算机网络的部件"><a href="#计算机网络的部件" class="headerlink" title="计算机网络的部件"></a>计算机网络的部件</h2><ul><li><p>端系统包括桌面计算机、服务器和移动计算机等。</p></li><li><p>主机被划分为客户(client)和服务器(server)</p></li><li><p><input checked="" disabled="" type="checkbox"> 什么是接入网？</p><p>将端系统物理连接到<strong>边缘路由器</strong>的网络称为接入网。边缘路由器是通信路径上的第一台路由器。</p></li></ul><h2 id="分组交换"><a href="#分组交换" class="headerlink" title="分组交换"></a>分组交换</h2><h2 id="协议"><a href="#协议" class="headerlink" title="协议"></a>协议</h2><h3 id="TCP五层模型"><a href="#TCP五层模型" class="headerlink" title="TCP五层模型"></a>TCP五层模型</h3><ol><li><p>应用层</p><ul><li>HTTP：Web文档请求和传送</li><li>SMTP：电子邮件报文的传输</li><li>FTP：两个端系统间的文件传送</li><li>DNS：用于域名解析，将域名转换为IP地址</li></ul></li><li><p>运输层</p><blockquote><p>提供端到端的数据传输服务。</p><p>它为应用程序提供了可靠、流畅的数据传输服务，并在网络传输过程中保证数据的正确性和可靠性。</p></blockquote><ul><li>TCP：传输控制协议，可靠的、面向连接的数据传输服务。它将数据分割成报文段，并提供流量控制、拥塞控制、序号管理和重传机制等功能。</li><li>UDP：用户数据报协议，无连接的数据传输服务，它不保证数据传输的正确性和可靠性，但具有快速、轻量的优点，常用于实现音频、视频和网络游戏等实时应用。</li></ul></li><li><p>网络层</p><blockquote><p>负责将称为<strong>数据报</strong>的网络层分组从一台主机移动到另一台主机。</p></blockquote><ul><li>IP：互联网协议，定义数据报中各字段的作用</li><li>ARP：地址解析协议</li><li>RARP：逆地址解析协议</li></ul></li><li><p>链路层</p><blockquote><p>负责在相邻节点间传送数据帧，并提供一些错误监测和矫正功能。</p></blockquote><ul><li>Ethernet：以太网协议</li><li>Wi-Fi：无线协议</li></ul></li><li><p>物理层</p><blockquote><p>负责在物理媒介上传输比特流。</p></blockquote></li></ol><h3 id="OSI七层模型"><a href="#OSI七层模型" class="headerlink" title="OSI七层模型"></a>OSI七层模型</h3><blockquote><p>应用层、表示层、会话层、运输层、网络层、数据链路层、物理层</p></blockquote><p><img src="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307091857461.png" alt="image-20230622212604893"></p><p><img src="https://shenyunmomie.oss-cn-beijing.aliyuncs.com/imags/202307091857774.png" alt="image-20230622212652909"></p>]]></content>
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="访问网站背后过程"><a href="#访问网站背后过程" class="headerlink" title="访问网站背后过程"></a>访问网站背后过程</h1><blockquote><p>解释访问过程之前，首先要了解<strong>计算机网络的基础知识</strong>和<strong>网站部署过程</strong></p></blockquote><h2 id="计算机网络基础知识"><a href="#计算机网络基础知识" class="headerlink" title="计算机网络基础知识"></a>计算机网络基础知识</h2><p>主要了解TCP五层模型：<a href="/2023/07/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="计算机网络基础知识">相关文章链接，点击这里</a></p><h2 id="网站是如何部署的？"><a href="#网站是如何部署的？" class="headerlink" title="网站是如何部署的？"></a>网站是如何部署的？</h2><ol><li>准备服务器：首先，需要选择一个安全可靠的服务器，购买服务器的空间，包括服务器类型、带宽、存储空间和机房等。</li><li>配置环境：安装服务器所需的操作系统、Web 服务器（如Apache、Nginx等）和数据库（如MySQL、PostgreSQL、MongoDB等）等必要组件，配置相关的服务。</li><li>部署代码：将编写好的网站代码上传至服务器，通过Web服务器将代码部署到服务器上。此时，通常需要将网站的<strong>域名</strong>和<strong>IP地址</strong>绑定，使访问该域名的用户能够正确访问该网站。</li><li>域名购买和解析：在国内购买域名，并在 DNS 解析商处将域名解析到服务器的 IP 地址上。</li><li>网站备案：在国内部署网站，需要进行备案手续，主要包括备案材料的准备以及在当地官方网站进行系统备案。</li><li>数据库配置：如果网站使用了数据库，将需要创建网站对应的数据库、配置数据库连接和数据表等基础操作。</li><li>调试：部署完成后，需要进行测试和调试，包括测试网站在不同浏览器下的兼容性、测试代码的漏洞和安全性、测试服务器的稳定性和性能等等。</li></ol><h2 id="网站的访问过程经历哪些步骤"><a href="#网站的访问过程经历哪些步骤" class="headerlink" title="网站的访问过程经历哪些步骤"></a>网站的访问过程经历哪些步骤</h2><h3 id="DNS域名解析协议"><a href="#DNS域名解析协议" class="headerlink" title="DNS域名解析协议"></a>DNS域名解析协议</h3><blockquote><p>将域名解析为ip地址。</p></blockquote><ul><li><input disabled="" type="checkbox"> 什么是DNS？<ul><li>一个由分层的DNS服务器实现的分布式数据库</li><li>一个使得主机能够查询分布式数据库的应用层协议</li></ul></li></ul><p>DNS通常是由其他应用层协议所使用的，包括HTTP、SMTP和FTP，</p><h3 id="TCP三次握手"><a href="#TCP三次握手" class="headerlink" title="TCP三次握手"></a>TCP三次握手</h3><p><img src="C:\Users\神殒魔灭\AppData\Roaming\Typora\typora-user-images\image-20230624000722342.png" alt="image-20230624000722342"></p><h3 id="HTTP请求"><a href="#HTTP请求" class="headerlink" title="HTTP请求"></a>HTTP请求</h3><blockquote><p>这个请求中包含了请求的方式（GET或POST）、请求头（告诉服务器浏览器的类型、支持的压缩格式等信息）和请求体（如果是POST请求，将提交数据）。</p></blockquote><h3 id="服务器响应"><a href="#服务器响应" class="headerlink" title="服务器响应"></a>服务器响应</h3><blockquote><p>一旦服务器收到请求，它会进行处理并返回响应。响应也包含了HTTP状态码（如200表示成功，404表示未找到页面等）和响应头（如服务器类型、响应时间和数据类型等信息）。</p></blockquote><h3 id="接收响应"><a href="#接收响应" class="headerlink" title="接收响应"></a>接收响应</h3><blockquote><p> 一旦浏览器收到响应，它会对响应进行处理和解析，并将结果渲染在用户界面中。</p></blockquote><h3 id="断开连接"><a href="#断开连接" class="headerlink" title="断开连接"></a>断开连接</h3><blockquote><p>一旦所有数据都传输完毕，浏览器会关闭TCP连接，释放资源，此时用户与服务器的通信就结束了</p></blockquote>]]></content>
       
       
       <categories>
